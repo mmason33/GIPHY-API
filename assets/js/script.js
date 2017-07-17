@@ -1,6 +1,6 @@
 // api key dc6zaTOxFJmzC
 // host api.giphy.com
-// search cat http://api.giphy.com/v1/stickers/search?q=cat&api_key=dc6zaTOxFJmzC
+// search cat https://api.giphy.com/v1/stickers/search?q=cat&api_key=dc6zaTOxFJmzC
 //style="background:url(${res.data[i].images.fixed_height.url}) no-repeat center center; background-size:cover;"
 
 function api (searchTerm , page) {
@@ -8,7 +8,7 @@ function api (searchTerm , page) {
 	let res;
 
 	$.ajax({
-		url: `http://api.giphy.com/v1/stickers/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${page}`,
+		url: `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${page}`,
 		method: 'GET'
 
 	}).done(function(result){
