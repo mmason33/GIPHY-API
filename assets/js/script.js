@@ -21,7 +21,7 @@ function api (searchTerm , page) {
 
 			$('.gifs-returned-row').append(
 				'<div class="col-md-4 text-center">' +
-					`<div class="gif" id="${i}"></div>` +
+					`<div class="gif" id="${i}" style="background:url(${res.data[i].images.fixed_height.url}) no-repeat center center; background-size:cover;"></div>` +
 					`<a href="#" class="gif-link-view btn btn-primary">View</a>` +
 					`<a href="${res.data[i].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
 				'</div>'
@@ -38,27 +38,32 @@ function api (searchTerm , page) {
 
 			if ($(this).hasClass('playing') === false) {
 				$(this).addClass('playing');
-				$(this).css('background', 'url('+ res.data[id].images.fixed_height.url +')');
+				$(this).css({'background':'url('+ res.data[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
 			} else if ($(this).hasClass('playing') === true) {
 				$(this).removeClass('playing');
-				$(this).css('background', 'url('+ res.data[id].images.fixed_height_still.url +')');
+				$(this).css({'background':'url('+ res.data[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
 			}
 
 		});	
 
 		$('.gif-link-view').click( function () {
+			console.log($(this).siblings('.gif').hasClass('gif-view') === false);
+			if ($(this).siblings('.gif').hasClass('gif-view') === false) {
+				$(this).parent('.col-md-4').removeClass('col-md-4');
+				$('.col-md-4').fadeOut();
 
-			$(this).parent('.col-md-4').removeClass('col-md-4');
-			$('.col-md-4').fadeOut();
+				setTimeout(() => {
 
-			setTimeout( function () {
+					$(this).siblings('.gif').addClass('gif-view');
+					$(this).text('Back');
 
-				$('.gif').animate({
-					height: 400,
-					width: 700
-				},600);
-				
-			}, 500);
+				}, 500);
+			} else {
+				$(this).parent().addClass('col-md-4');
+				$(this).siblings('.gif').removeClass('gif-view');
+				$(this).text('View');
+				$('.col-md-4').fadeIn();
+			}	
 
 		});
 
