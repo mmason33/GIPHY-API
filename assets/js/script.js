@@ -1,7 +1,8 @@
 // api key dc6zaTOxFJmzC
 // host api.giphy.com
 // search cat https://api.giphy.com/v1/stickers/search?q=cat&api_key=dc6zaTOxFJmzC
-//style="background:url(${res.data[i].images.fixed_height.url}) no-repeat center center; background-size:cover;"
+// style="background:url(${res.data[i].images.fixed_height.url}) no-repeat center center; background-size:cover;"
+
 
 function api (searchTerm , page) {
 
@@ -20,8 +21,8 @@ function api (searchTerm , page) {
 
 			$('.gifs-returned-row').append(
 				'<div class="col-md-4 text-center">' +
-					`<div class="gif" id="${i}"style="background:url(${res.data[i].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
-					`<a href="${res.data[i].url}" class="gif-link-view btn btn-primary">View GIF</a>` +
+					`<div class="gif" id="${i}"></div>` +
+					`<a href="#" class="gif-link-view btn btn-primary">View</a>` +
 					`<a href="${res.data[i].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
 				'</div>'
 			);
@@ -32,8 +33,9 @@ function api (searchTerm , page) {
 
 
 		$('.gif').hover( function () {
+
 			let id = $(this).attr("id");
-			console.log($(this).hasClass('playing'));
+
 			if ($(this).hasClass('playing') === false) {
 				$(this).addClass('playing');
 				$(this).css('background', 'url('+ res.data[id].images.fixed_height.url +')');
@@ -41,8 +43,23 @@ function api (searchTerm , page) {
 				$(this).removeClass('playing');
 				$(this).css('background', 'url('+ res.data[id].images.fixed_height_still.url +')');
 			}
-		});	
 
+		// });	
+
+		$('.gif-link-view').click( function () {
+
+			$(this).parent('.col-md-4').removeClass('col-md-4');
+			$('.col-md-4').fadeOut();
+
+			setTimeout( function () {
+
+				$('.gif').animate({
+					height: 400,
+					width: 700
+				},600);
+			}, 500);
+
+		});
 
 
 	});
