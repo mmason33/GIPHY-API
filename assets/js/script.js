@@ -44,7 +44,7 @@ function api (searchTerm , page) {
 				$(this).css('background', 'url('+ res.data[id].images.fixed_height_still.url +')');
 			}
 
-		// });	
+		});	
 
 		$('.gif-link-view').click( function () {
 
@@ -57,6 +57,7 @@ function api (searchTerm , page) {
 					height: 400,
 					width: 700
 				},600);
+				
 			}, 500);
 
 		});
