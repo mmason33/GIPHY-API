@@ -51,6 +51,8 @@
 
 img {
   margin-bottom: 2rem;
+  padding-top: 2rem;
+  max-width: 65% !important;
 }
 
 input.form-control, input.form-control:focus {

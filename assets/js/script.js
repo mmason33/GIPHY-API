@@ -6,15 +6,15 @@
 function api (searchTerm , page) {
 
 	let res;
-
+	let query =  `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${page}`;
 	$.ajax({
-		url: `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${page}`,
+		url: query,
 		method: 'GET'
 
 	}).done(function(result){
 
 		res = result;
-		console.log(res);
+		console.log(res, query);
 
 		for (let i = 0; i < res.data.length; i++) { 
 
@@ -61,7 +61,8 @@ $(document).ready(function () {
 
 						e.preventDefault();
 						$('.gifs-returned-row').empty();
-						let searchTerm = $('#gif-search').val();
+						let searchTerm = $('#gif-search').val().replace(/ /g, '+');
+						// searchTerm.replace(/ /g, '+');
 						let page = 0;
 						api(searchTerm, page);
 						console.log(searchTerm);
@@ -75,12 +76,12 @@ $(document).ready(function () {
 									page += 25;
 									api(searchTerm, page)
 
-								    $('.scrollup').click(function () {
+			
 								        $("html, body").animate({
 								            scrollTop: 0
 								        }, 600);
 								        return false;
-								    });
+							
 
 								});
 
