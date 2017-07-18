@@ -22,49 +22,91 @@ function api (searchTerm , page) {
 				'<div class="col-md-4 text-center">' +
 					`<div class="gif" id="${i}"style="background:url(${res.data[i].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
 					`<a href="${res.data[i].url}" class="gif-link btn btn-primary">View GIF</a>` +
+					`<a href="${res.data[i].url}" class="gif-link btn btn-primary" download>Download</a>` +
 				'</div>'
 			);
 
 		}
-		if (res.pagination.offset === 0) {
-			$('.gifs-returned').append('<button class="load btn btn-primary">Load More</button>');
-		}
 
-		$('.gif').click( function () {
+		$('.load').removeClass('hide');
+
+
+		$('.gif').hover( function () {
 			let id = $(this).attr("id");
-
-			if ($(this).hasClass('playing') === true) {
-				$(this).remove('playing');
-				$(this).css('background', 'url('+ res.data[id].images.fixed_height_still.url +')');
-			} else {
+			console.log($(this).hasClass('playing'));
+			if ($(this).hasClass('playing') === false) {
 				$(this).addClass('playing');
 				$(this).css('background', 'url('+ res.data[id].images.fixed_height.url +')');
+			} else if ($(this).hasClass('playing') === true) {
+				$(this).removeClass('playing');
+				$(this).css('background', 'url('+ res.data[id].images.fixed_height_still.url +')');
 			}
 		});	
+
 	});
 
 }
 
-$('#gif-button').click( function (e) {
+$(document).ready(function () {
 
-	e.preventDefault();
-	
-	let searchTerm = $('#gif-search').val();
-	let page = 0;
-	api(searchTerm, page);
+		    $(window).scroll(function () {
+		        if ($(this).scrollTop() > 100) {
+		            $('.scrollup').fadeIn();
+		        } else {
+		            $('.scrollup').fadeOut();
+		        }
+		    });
+
+			$('#gif-button').click( function (e) {
+
+						e.preventDefault();
+						$('.gifs-returned-row').empty();
+						let searchTerm = $('#gif-search').val();
+						let page = 0;
+						api(searchTerm, page);
+						console.log(searchTerm);
+
+						setTimeout( function () {
+
+								$('.load').click( function (e) {
+
+									e.preventDefault();
+									$('.gifs-returned-row').empty();
+									page += 25;
+									api(searchTerm, page)
+
+								    $('.scrollup').click(function () {
+								        $("html, body").animate({
+								            scrollTop: 0
+								        }, 600);
+								        return false;
+								    });
+
+								});
 
 
-	setTimeout( function () {
+						}, 500);
 
-		$('.load').click( function (e) {
-			e.preventDefault();
-			$('.gifs-returned-row').empty();
-			// $('.load').remove();
-			page += 25;
-			api(searchTerm, page)
+			});
 
-		});
 
-	}, 500);
+});
+
+$(document).ready(function () {
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('.scrollup').fadeIn();
+        } else {
+            $('.scrollup').fadeOut();
+        }
+    });
+
+    $('.scrollup').click(function () {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
 
 });

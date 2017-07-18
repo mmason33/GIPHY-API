@@ -1,4 +1,4 @@
-.wrapper { 
+#giphy { 
   height: 100%;
   width: 100%;
   left:0;
@@ -8,6 +8,7 @@
   position: absolute;
   background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   background-size: 1800% 1800%;
+  background-attachment: fixed;
   -webkit-animation: rainbow 18s ease infinite;
   -z-animation: rainbow 18s ease infinite;
   -o-animation: rainbow 18s ease infinite;
@@ -37,8 +38,49 @@
 }
 
 .gif {
-  border: 1px solid #e3e3e3;
+  border: 3px solid #000;
   position: relative;
   height: 200px;
-  width: 300px;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.hide {
+  display: none;
+}
+
+img {
+  margin-bottom: 2rem;
+}
+
+input.form-control, input.form-control:focus {
+  background:transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #000;
+  border-radius: 0;
+  color: #000;
+  font-size: 1.1em;
+  outline: none;
+}
+
+input::placeholder {
+  color: #000 !important;
+}
+
+a.load {
+  border: 2px solid #fff;
+  color: #fff;
+  padding: .5rem 1rem;
+  font-size: 1.1em;
+  border-radius: 5px;
+}
+
+a.load:hover {
+  text-decoration: none;
+}
+
+.load-wrap {
+  padding: 2rem 0;
 }
