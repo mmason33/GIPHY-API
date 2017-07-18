@@ -22,7 +22,7 @@ function api (searchTerm , page) {
 				'<div class="col-md-4 text-center">' +
 					`<div class="gif" id="${i}"style="background:url(${res.data[i].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
 					`<a href="${res.data[i].url}" class="gif-link btn btn-primary">View GIF</a>` +
-					`<a href="${res.data[i].url}" class="gif-link btn btn-primary" download>Download</a>` +
+					`<a href="${res.data[i].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
 				'</div>'
 			);
 
@@ -62,7 +62,6 @@ $(document).ready(function () {
 						e.preventDefault();
 						$('.gifs-returned-row').empty();
 						let searchTerm = $('#gif-search').val().replace(/ /g, '+');
-						// searchTerm.replace(/ /g, '+');
 						let page = 0;
 						api(searchTerm, page);
 						console.log(searchTerm);
