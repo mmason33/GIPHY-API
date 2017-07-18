@@ -63,6 +63,9 @@ function api (searchTerm , page) {
 				$(this).siblings('.gif').removeClass('gif-view');
 				$(this).text('View');
 				$('.col-md-4').fadeIn();
+			    $('html, body').animate({
+			        scrollTop: $(this).parent().offset().top
+			    }, 600);
 			}	
 
 		});
@@ -93,7 +96,7 @@ $(document).ready(function () {
 
 						setTimeout( function () {
 
-								$('.load').click( function (e) {
+								$('.scrollup').click( function (e) {
 
 									e.preventDefault();
 									$('.gifs-returned-row').empty();
@@ -103,8 +106,7 @@ $(document).ready(function () {
 			
 								        $("html, body").animate({
 								            scrollTop: 0
-								        }, 600);
-								        return false;
+								        }, 1000);
 							
 
 								});
