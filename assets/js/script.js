@@ -106,15 +106,37 @@ $(document).ready(function () {
 
 		
 
-		$('.load').click( function (e) {
+		// $('.load').click( function (e) {
 
-			e.preventDefault();
-			page += 25;
-			api(searchTerm, page)
+		// 	e.preventDefault();
+		// 	page += 25;
+		// 	api(searchTerm, page)
+
+		// });
+
+		$(window).scroll( function () {
+
+			var hT = $('.gif').last().offset().top;
+			var hH = $('.gif').last().outerHeight();
+			var wH = $(window).height();
+			var wS = $(this).scrollTop();
+
+
+			if (wS > (hT + hH - wH)) {
+				console.log('worked');
+				e.preventDefault();
+				page += 25;
+				api(searchTerm, page)
+
+			}
+
 
 		});
 		
 	});
+
+
+	// smooth scroll back to top
 
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
