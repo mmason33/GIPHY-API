@@ -48,7 +48,7 @@ var giphy = {
 
 			$('.gif-link-view').click(giphy.handleViewClick);
 
-			$(window).scroll(giphy.lazyLoad);
+			$(window).on( 'scroll', giphy.lazyLoad);
 
 			$(window).scroll(giphy.smoothScroll);
 
@@ -122,12 +122,10 @@ var giphy = {
 		console.log(wS, diff);
 
 		if (wS > diff) {
-			setTimeout( function() {
-				console.log('worked', giphy.offset);
-				giphy.offset += 25;
-				giphy.api(giphy.searchTerm, giphy.offset)
-			}, 600);
-
+			console.log('worked', giphy.offset);
+			$(window).off();
+			giphy.offset += 25;
+			giphy.api(giphy.searchTerm, giphy.offset)
 		}
 
 	},
@@ -152,6 +150,11 @@ var giphy = {
 	}
 }
 
+$(document).ready(function () {
+
+	$('#gif-button').click(giphy.handleSubmit);
+
+});
 
 
 
@@ -247,9 +250,9 @@ var giphy = {
 
 // }
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
-	$('#gif-button').click(giphy.handleSubmit);
+// 	$('#gif-button').click(giphy.handleSubmit);
 
 	// $('#gif-button').click( function (e) {
 	// 	e.preventDefault();
@@ -307,4 +310,4 @@ $(document).ready(function () {
  //    });   
 
 
-});
+// });
