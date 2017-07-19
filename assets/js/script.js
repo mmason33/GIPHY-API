@@ -145,7 +145,7 @@ var giphy = () => {
 			toTop () {
 
 					
-		        $("html, body").animate({
+		        $("html, body").stop(true, false).animate({
 		            scrollTop: 0
 		        }, 1000);
 				      		
