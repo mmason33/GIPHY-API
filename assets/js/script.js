@@ -3,7 +3,9 @@
 // search cat https://api.giphy.com/v1/stickers/search?q=cat&api_key=dc6zaTOxFJmzC
 // style="background:url(${res.data[i].images.fixed_height.url}) no-repeat center center; background-size:cover;"
 
-var res;
+var res = [];
+var resIndex;
+var page = 0;
 function api (searchTerm , page) {
 
 	let query =  `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${page}`;
@@ -13,16 +15,16 @@ function api (searchTerm , page) {
 
 	}).done(function(result){
 
-		res = result;
-		console.log(res, query);
+		console.log(query);
 
-		for (let i = 0; i < res.data.length; i++) { 
-
+		for (let i = 0; i < result.data.length; i++) { 
+			res.push(result.data[i]);
+			var indexOF = res.indexOf(result.data[i]);
 			$('.gifs-returned-row').append(
 				'<div class="col-md-4 text-center">' +
-					`<div class="gif" id="${i}" style="background:url(${res.data[i].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
+					`<div class="gif" data-gif="${indexOF}" style="background:url(${res[indexOF].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
 					`<a href="#" class="gif-link-view btn btn-primary">View</a>` +
-					`<a href="${res.data[i].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
+					`<a href="${res[indexOF].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
 				'</div>'
 			);
 
@@ -42,14 +44,14 @@ function api (searchTerm , page) {
 
 function handleHover() {
 
-	let id = $(this).attr("id");
+	let id = $(this).attr('data-gif');
 
 	if ($(this).hasClass('playing') === false && $(this).hasClass('.gif-view') === false) {
 		$(this).addClass('playing');
-		$(this).css({'background':'url('+ res.data[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
+		$(this).css({'background':'url('+ res[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
 	} else if ($(this).hasClass('playing') === true && $(this).hasClass('.gif-view') === false) {
 		$(this).removeClass('playing');
-		$(this).css({'background':'url('+ res.data[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
+		$(this).css({'background':'url('+ res[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
 	}
 
 }
@@ -58,7 +60,7 @@ function handleViewClick() {
 
 		$('.gif').off();
 
-		let id = $(this).siblings('.gif').attr('id');
+		let id = $(this).siblings('.gif').attr('data-gif');
 
 		if ($(this).siblings('.gif').hasClass('gif-view') === false) {
 
@@ -69,7 +71,7 @@ function handleViewClick() {
 			setTimeout(() => {
 
 				$(this).siblings('.gif').addClass('gif-view');
-				$(this).siblings('.gif').css({'background':'url('+ res.data[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
+				$(this).siblings('.gif').css({'background':'url('+ res[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
 				$(this).text('Back');
 
 			}, 500);
@@ -99,16 +101,14 @@ $(document).ready(function () {
 		e.preventDefault();
 		$('.gifs-returned-row').empty();
 		let searchTerm = $('#gif-search').val().replace(/ /g, '+');
-		let page = 0;
 		api(searchTerm, page);
 		console.log(searchTerm);
 
 		
 
-		$('.scrollup').click( function (e) {
+		$('.load').click( function (e) {
 
 			e.preventDefault();
-			// $('.gifs-returned-row').empty();
 			page += 25;
 			api(searchTerm, page)
 
