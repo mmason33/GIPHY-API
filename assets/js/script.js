@@ -57,13 +57,15 @@ function handleHover() {
 function handleViewClick() {
 
 		$('.gif').off();
+
 		let id = $(this).siblings('.gif').attr('id');
 
 		if ($(this).siblings('.gif').hasClass('gif-view') === false) {
 
 			$(this).parent('.col-md-4').removeClass('col-md-4');
 			$('.col-md-4').fadeOut();
-
+			$('.load').hide();
+			$('.top').hide();
 			setTimeout(() => {
 
 				$(this).siblings('.gif').addClass('gif-view');
@@ -78,6 +80,8 @@ function handleViewClick() {
 			$(this).siblings('.gif').removeClass('gif-view');
 			$(this).text('View');
 			$('.col-md-4').fadeIn();
+			$('.load').show();
+			$('.top').show();
 
 		    $('html, body').animate({
 		        scrollTop: $(this).parent().offset().top
@@ -91,8 +95,8 @@ function handleViewClick() {
 
 $(document).ready(function () {
 
-	$('#gif-button').click( function () {
-
+	$('#gif-button').click( function (e) {
+		e.preventDefault();
 		$('.gifs-returned-row').empty();
 		let searchTerm = $('#gif-search').val().replace(/ /g, '+');
 		let page = 0;
