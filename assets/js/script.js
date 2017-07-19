@@ -39,7 +39,7 @@ var giphy = () => {
 						gif.gifIndex = gif.response.indexOf(result.data[i]);
 
 						$('.gifs-returned-row').append(
-							'<div class="col-md-4 col-sm-12 text-center">' +
+							'<div class="col-md-4 col-sm-12 text-center animated zoomIn">' +
 								`<div class="gif" data-gif="${gif.gifIndex}" style="background:url(${gif.response[gif.gifIndex].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
 								`<a href="#" class="gif-link-view btn btn-primary">View</a>` +
 								`<a href="${gif.response[gif.gifIndex].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
@@ -83,7 +83,7 @@ var giphy = () => {
 				$('.gif').off();
 
 				let id = $(this).siblings('.gif').attr('data-gif');
-
+				console.log(id);
 				if ($(this).siblings('.gif').hasClass('gif-view') === false) {
 
 					$(this).parent('.col-md-4').removeClass('col-md-4');
