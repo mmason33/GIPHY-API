@@ -3,6 +3,17 @@
 // search cat https://api.giphy.com/v1/stickers/search?q=cat&api_key=dc6zaTOxFJmzC
 // style="background:url(${res.data[i].images.fixed_height.url}) no-repeat center center; background-size:cover;"
 
+var giphy = {
+	response: [],
+	gifIndex: 0,
+	offset: 0,
+	api: function (){},
+	handleHover: function () {},
+	handleViewClick: function () {},
+	lazyLoad: function () {},
+	smoothScroll: function () {}
+}
+
 var res = [];
 var resIndex;
 var page = 0;
@@ -21,7 +32,7 @@ function api (searchTerm , page) {
 			res.push(result.data[i]);
 			var indexOF = res.indexOf(result.data[i]);
 			$('.gifs-returned-row').append(
-				'<div class="col-md-4 text-center">' +
+				'<div class="col-md-4 col-sm-12 text-center">' +
 					`<div class="gif" data-gif="${indexOF}" style="background:url(${res[indexOF].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
 					`<a href="#" class="gif-link-view btn btn-primary">View</a>` +
 					`<a href="${res[indexOF].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
