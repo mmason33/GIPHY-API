@@ -118,11 +118,15 @@ var giphy = {
 		var wH = $(window).height();
 		var wS = $(this).scrollTop();
 
+		var diff = (hT + hH) - wH;
+		console.log(wS, diff);
 
-		if (wS > (hT + hH - wH)) {
-			console.log('worked', wS > (hT + hH - wH));
-			giphy.offset += 25;
-			giphy.api(giphy.searchTerm, giphy.offset)
+		if (wS > diff) {
+			setTimeout( function() {
+				console.log('worked', giphy.offset);
+				giphy.offset += 25;
+				giphy.api(giphy.searchTerm, giphy.offset)
+			}, 600);
 
 		}
 
