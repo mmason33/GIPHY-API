@@ -126,7 +126,7 @@ var giphy = () => {
 				var wS = $(window).scrollTop();
 				var diff = (hT + hH) - wH;
 
-				if (wS > diff + 50) {
+				if (wS > diff && $('.gif').hasClass('.gif-view') !== true) {
 
 					$(window).off();
 					gif.offset += 25;
