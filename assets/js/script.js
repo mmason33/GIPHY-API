@@ -12,7 +12,8 @@ var giphy = () => {
 			searchTerm: '',
 
 			handleSubmit (e) {
-
+				
+				gif.offset = 0;
 				console.log(this);
 				e.preventDefault();
 				$('.gifs-returned-row').empty();
