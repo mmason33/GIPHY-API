@@ -13,4 +13,4 @@ A JavaScript GIF search, using the [giphy.com](giphy.com) API.
 
 Mobile Screenshot
 
-![GIPHY-API Screenshot](https://github.com/mmason33/GIPHY-API/blob/master/assets/images/mobile.png)
+![GIPHY-API Screenshot](https://github.com/mmason33/GIPHY-API/blob/master/assets/images/mobile1.jpg)
