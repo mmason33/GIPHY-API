@@ -12,7 +12,7 @@ var giphy = () => {
 			searchTerm: '',
 
 			handleSubmit (e) {
-				
+
 				gif.offset = 0;
 				console.log(this);
 				e.preventDefault();
@@ -85,6 +85,8 @@ var giphy = () => {
 
 				let id = $(this).siblings('.gif').attr('data-gif');
 				console.log(id);
+				console.log($(this).siblings('.gif').hasClass('gif-view') === false);
+
 				if ($(this).siblings('.gif').hasClass('gif-view') === false) {
 
 					$('body').css('overflow', 'hidden');
@@ -119,20 +121,21 @@ var giphy = () => {
 			},
 
 			lazyLoad () {
+				setTimeout( function () {
+					var hT = $('.gif').last().offset().top;
+					var hH = $('.gif').last().outerHeight();
+					var wH = $(window).height();
+					var wS = $(window).scrollTop();
+					var diff = (hT + hH) - wH;
 
-				var hT = $('.gif').last().offset().top;
-				var hH = $('.gif').last().outerHeight();
-				var wH = $(window).height();
-				var wS = $(window).scrollTop();
-				var diff = (hT + hH) - wH;
+					if (wS > diff && $('.gif').hasClass('gif-view') !== true) {
 
-				if (wS > diff && $('.gif').hasClass('gif-view') !== true) {
+						$(window).off();
+						gif.offset += 25;
+						gif.api(gif.searchTerm, gif.offset)
 
-					$(window).off();
-					gif.offset += 25;
-					gif.api(gif.searchTerm, gif.offset)
-
-				}
+					}
+				}, 200);
 
 			},
 			smoothScroll () {
