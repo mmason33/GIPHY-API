@@ -145,6 +145,10 @@ a.load:hover {
     right: 20px !important
   }
 
+  .zoomIn {
+    animation: none !important;
+  }
+
 }
 
 @media screen and (max-width: 376px) {
