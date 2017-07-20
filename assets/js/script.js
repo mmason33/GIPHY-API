@@ -126,7 +126,7 @@ var giphy = () => {
 				var wS = $(window).scrollTop();
 				var diff = (hT + hH) - wH;
 
-				if (wS > diff && $('.gif').hasClass('.gif-view') !== true) {
+				if (wS > diff && $('.gif').hasClass('gif-view') !== true) {
 
 					$(window).off();
 					gif.offset += 25;
@@ -161,6 +161,8 @@ var giphy = () => {
 const gif = giphy();
 
 $(document).ready(function () {
+
+	console.log($('.gif').hasClass('gif-view') !== true);
 
 	$('#gif-button').click(gif.handleSubmit);
 
