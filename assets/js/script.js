@@ -86,6 +86,7 @@ var giphy = () => {
 				console.log(id);
 				if ($(this).siblings('.gif').hasClass('gif-view') === false) {
 
+					$('body').css('overflow', 'hidden');
 					$(this).parent('.col-lg-4').removeClass('col-lg-4');
 					$('.col-lg-4').fadeOut();
 					$('.top').hide();
@@ -98,6 +99,8 @@ var giphy = () => {
 					}, 500);
 
 				} else {
+
+					$('body').css('overflow', 'visible');
 					$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
 					$(this).parent().addClass('col-lg-4');
 					$(this).siblings('.gif').removeClass('gif-view');
@@ -123,7 +126,7 @@ var giphy = () => {
 				var wS = $(window).scrollTop();
 				var diff = (hT + hH) - wH;
 
-				if (wS > diff) {
+				if (wS > diff + 50) {
 
 					$(window).off();
 					gif.offset += 25;
