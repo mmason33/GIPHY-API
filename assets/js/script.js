@@ -90,13 +90,12 @@ var giphy = () => {
 					$(this).parent('.col-lg-4').removeClass('col-lg-4');
 					$('.col-lg-4').fadeOut();
 					$('.top').hide();
-					setTimeout(() => {
 
-						$(this).siblings('.gif').addClass('gif-view');
-						$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
-						$(this).html('<i class="fa fa-undo" aria-hidden="true"></i>');
+					$(this).siblings('.gif').addClass('gif-view');
+					$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
+					$(this).html('<i class="fa fa-undo" aria-hidden="true"></i>');
 
-					}, 500);
+
 
 				} else {
 
