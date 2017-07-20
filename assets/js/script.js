@@ -39,10 +39,10 @@ var giphy = () => {
 						gif.gifIndex = gif.response.indexOf(result.data[i]);
 
 						$('.gifs-returned-row').append(
-							'<div class="col-md-4 col-sm-12 text-center animated zoomIn">' +
+							'<div class="col-lg-4 col-md-12 text-center animated zoomIn">' +
 								`<div class="gif" data-gif="${gif.gifIndex}" style="background:url(${gif.response[gif.gifIndex].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
-								`<a href="#" class="gif-link-view btn btn-primary">View</a>` +
-								`<a href="${gif.response[gif.gifIndex].images.fixed_height.url}" class="gif-link btn btn-primary" download>Download</a>` +
+								`<a href="#" class="gif-link-view btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>` +
+								`<a href="${gif.response[gif.gifIndex].images.fixed_height.url}" class="gif-link btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></a>` +
 							'</div>'
 						);
 
@@ -86,26 +86,26 @@ var giphy = () => {
 				console.log(id);
 				if ($(this).siblings('.gif').hasClass('gif-view') === false) {
 
-					$(this).parent('.col-md-4').removeClass('col-md-4');
-					$('.col-md-4').fadeOut();
+					$(this).parent('.col-lg-4').removeClass('col-lg-4');
+					$('.col-lg-4').fadeOut();
 					$('.top').hide();
 					setTimeout(() => {
 
 						$(this).siblings('.gif').addClass('gif-view');
 						$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
-						$(this).text('Back');
+						$(this).html('<i class="fa fa-undo" aria-hidden="true"></i>');
 
 					}, 500);
 
 				} else {
 					$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
-					$(this).parent().addClass('col-md-4');
+					$(this).parent().addClass('col-lg-4');
 					$(this).siblings('.gif').removeClass('gif-view');
-					$(this).text('View');
-					$('.col-md-4').fadeIn();
+					$(this).html('<i class="fa fa-eye" aria-hidden="true"></i>');
+					$('.col-lg-4').fadeIn();
 					$('.top').show();
 
-				    $('html, body').animate({
+				    $('html, body').stop(true, false).animate({
 				        scrollTop: $(this).parent().offset().top
 				    }, 600);
 
