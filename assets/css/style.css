@@ -127,6 +127,9 @@ a.load:hover {
 
 @media screen and (max-width: 577px) {
 
+  body {
+    background: #afff00 !important;
+  }
 
   #gif-button {
     margin-top: 1rem;
