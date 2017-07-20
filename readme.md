@@ -10,3 +10,7 @@ A JavaScript GIF search, using the [giphy.com](giphy.com) API.
 5. Add lazy loading, when the last gif is scrolled, load 25 more
 6. Refactor to a true Factory Function (Defined as a function that returns an object)
 7. Q&A, refactor and debug accordingly
+
+Mobile Screenshot
+
+![GIPHY-API Screenshot][assets/images/mobile.png]
