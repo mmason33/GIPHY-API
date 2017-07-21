@@ -53,8 +53,6 @@ var giphy = () => {
 
 					$('.gif').hover(gif.handleHover);
 
-					// $('.gif-link-view').click(gif.handleViewClick);
-
 					$(window).on( 'scroll', gif.lazyLoad);
 
 					$(window).scroll(gif.smoothScroll);
@@ -80,46 +78,6 @@ var giphy = () => {
 				}
 
 			},
-
-			// handleViewClick () {
-
-			// 	$('.gif').off();
-			// 	let id = $(this).siblings('.gif').attr('data-gif');
-			// 	console.log(id);
-			// 	console.log($(this).siblings('.gif').hasClass('gif-view') === false);
-
-			// 	if ($(this).siblings('.gif').hasClass('gif-view') === false) {
-
-			// 		$('body').css('overflow', 'hidden');
-			// 		$(this).parent('.col-lg-4').removeClass('col-lg-4');
-			// 		$('.col-lg-4').fadeOut();
-			// 		$('.top').hide();
-
-			// 		$(this).siblings('.gif').addClass('gif-view');
-			// 		$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
-			// 		$(this).html('<i class="fa fa-undo" aria-hidden="true"></i>');
-
-
-
-			// 	} else {
-
-			// 		$('body').css('overflow', 'visible');
-			// 		$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
-			// 		$(this).parent().addClass('col-lg-4');
-			// 		$(this).siblings('.gif').removeClass('gif-view');
-			// 		$(this).html('<i class="fa fa-eye" aria-hidden="true"></i>');
-			// 		$('.col-lg-4').fadeIn();
-			// 		$('.top').show();
-
-			// 	    $('html, body').stop(true, false).animate({
-			// 	        scrollTop: $(this).parent().offset().top
-			// 	    }, 600);
-
-			// 		$('.gif').hover(gif.handleHover);
-
-			// 	}	
-
-			// },
 
 			lazyLoad () {
 				var hT = $('.gif').last().offset().top;
