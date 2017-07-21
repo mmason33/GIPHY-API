@@ -13,19 +13,19 @@ var giphy = () => {
 
 			handleSubmit (e) {
 
-				gif.offset = 0;
-				console.log(this);
-				e.preventDefault();
-				$('.gifs-returned-row').empty();
-				gif.searchTerm = $('#gif-search').val().replace(/ /g, '+');
-				gif.api(gif.searchTerm, gif.offset);
-
+				if ($(this).val() !== '') {
+					gif.offset = 0;
+					e.preventDefault();
+					$('.gifs-returned-row').empty();
+					gif.searchTerm = $(this).val().replace(/ /g, '+');
+					gif.api(gif.searchTerm, gif.offset);
+				}
 
 			},
 
 			api (searchTerm, offset) {
 
-				let query =  `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${offset}`;
+				let query =  `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${offset}`;
 				$.ajax({
 					url: query,
 					method: 'GET'
@@ -39,19 +39,21 @@ var giphy = () => {
 						gif.response.push(result.data[i]);
 						gif.gifIndex = gif.response.indexOf(result.data[i]);
 
-						$('.gifs-returned-row').append(
-							'<div class="col-lg-4 col-md-12 text-center animated zoomIn">' +
-								`<div class="gif" data-gif="${gif.gifIndex}" style="background:url(${gif.response[gif.gifIndex].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
-								`<a href="#" class="gif-link-view btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>` +
-								`<a href="${gif.response[gif.gifIndex].images.fixed_height.url}" class="gif-link btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></a>` +
-							'</div>'
-						);
+		$('.gifs-returned-row').append(
+
+			'<div class="col-lg-4 col-md-12 text-center animated zoomIn">' +
+				`<div class="gif" data-gif="${gif.gifIndex}" style="background:url(${gif.response[gif.gifIndex].images.fixed_height_still.url}) no-repeat center center; background-size:cover;"></div>` +
+				`<a href="${gif.response[gif.gifIndex].images.fixed_height.url}" class="gif-link btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></a>` +
+				`<p>Rating: ${result.data[i].rating}</p>` +
+
+			'</div>'
+		);
 
 					}
 
 					$('.gif').hover(gif.handleHover);
 
-					$('.gif-link-view').click(gif.handleViewClick);
+					// $('.gif-link-view').click(gif.handleViewClick);
 
 					$(window).on( 'scroll', gif.lazyLoad);
 
@@ -69,72 +71,70 @@ var giphy = () => {
 
 				let id = $(this).attr('data-gif');
 
-				if ($(this).hasClass('playing') === false && $(this).hasClass('.gif-view') === false) {
+				if ($(this).hasClass('playing') === false) {
 					$(this).addClass('playing');
 					$(this).css({'background':'url('+ gif.response[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
-				} else if ($(this).hasClass('playing') === true && $(this).hasClass('.gif-view') === false) {
+				} else if ($(this).hasClass('playing') === true) {
 					$(this).removeClass('playing');
 					$(this).css({'background':'url('+ gif.response[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
 				}
 
 			},
 
-			handleViewClick () {
+			// handleViewClick () {
 
-				$('.gif').off();
-				let id = $(this).siblings('.gif').attr('data-gif');
-				console.log(id);
-				console.log($(this).siblings('.gif').hasClass('gif-view') === false);
+			// 	$('.gif').off();
+			// 	let id = $(this).siblings('.gif').attr('data-gif');
+			// 	console.log(id);
+			// 	console.log($(this).siblings('.gif').hasClass('gif-view') === false);
 
-				if ($(this).siblings('.gif').hasClass('gif-view') === false) {
+			// 	if ($(this).siblings('.gif').hasClass('gif-view') === false) {
 
-					$('body').css('overflow', 'hidden');
-					$(this).parent('.col-lg-4').removeClass('col-lg-4');
-					$('.col-lg-4').fadeOut();
-					$('.top').hide();
+			// 		$('body').css('overflow', 'hidden');
+			// 		$(this).parent('.col-lg-4').removeClass('col-lg-4');
+			// 		$('.col-lg-4').fadeOut();
+			// 		$('.top').hide();
 
-					$(this).siblings('.gif').addClass('gif-view');
-					$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
-					$(this).html('<i class="fa fa-undo" aria-hidden="true"></i>');
+			// 		$(this).siblings('.gif').addClass('gif-view');
+			// 		$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height.url +') no-repeat center center', 'background-size': 'cover'});
+			// 		$(this).html('<i class="fa fa-undo" aria-hidden="true"></i>');
 
 
 
-				} else {
+			// 	} else {
 
-					$('body').css('overflow', 'visible');
-					$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
-					$(this).parent().addClass('col-lg-4');
-					$(this).siblings('.gif').removeClass('gif-view');
-					$(this).html('<i class="fa fa-eye" aria-hidden="true"></i>');
-					$('.col-lg-4').fadeIn();
-					$('.top').show();
+			// 		$('body').css('overflow', 'visible');
+			// 		$(this).siblings('.gif').css({'background':'url('+ gif.response[id].images.fixed_height_still.url +') no-repeat center center', 'background-size': 'cover'});
+			// 		$(this).parent().addClass('col-lg-4');
+			// 		$(this).siblings('.gif').removeClass('gif-view');
+			// 		$(this).html('<i class="fa fa-eye" aria-hidden="true"></i>');
+			// 		$('.col-lg-4').fadeIn();
+			// 		$('.top').show();
 
-				    $('html, body').stop(true, false).animate({
-				        scrollTop: $(this).parent().offset().top
-				    }, 600);
+			// 	    $('html, body').stop(true, false).animate({
+			// 	        scrollTop: $(this).parent().offset().top
+			// 	    }, 600);
 
-					$('.gif').hover(gif.handleHover);
+			// 		$('.gif').hover(gif.handleHover);
 
-				}	
+			// 	}	
 
-			},
+			// },
 
 			lazyLoad () {
-				setTimeout( function () {
-					var hT = $('.gif').last().offset().top;
-					var hH = $('.gif').last().outerHeight();
-					var wH = $(window).height();
-					var wS = $(window).scrollTop();
-					var diff = (hT + hH) - wH;
+				var hT = $('.gif').last().offset().top;
+				var hH = $('.gif').last().outerHeight();
+				var wH = $(window).height();
+				var wS = $(window).scrollTop();
+				var diff = (hT + hH) - wH;
 
-					if (wS > diff && $('.gif').hasClass('gif-view') !== true) {
+				if (wS > diff && $('.gif').hasClass('gif-view') !== true) {
 
-						$(window).off();
-						gif.offset += 25;
-						gif.api(gif.searchTerm, gif.offset)
+					$(window).off();
+					gif.offset += 25;
+					gif.api(gif.searchTerm, gif.offset)
 
-					}
-				}, 200);
+				};
 
 			},
 			smoothScroll () {
