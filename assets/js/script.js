@@ -25,7 +25,7 @@ var giphy = () => {
 
 			api (searchTerm, offset) {
 
-				let query =  `https://api.giphy.com/v1/stickers/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${offset}`;
+				let query =  `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=dc6zaTOxFJmzC&offset=${offset}`;
 				$.ajax({
 					url: query,
 					method: 'GET'
