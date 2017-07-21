@@ -164,8 +164,6 @@ const gif = giphy();
 
 $(document).ready(function () {
 
-	console.log($('.gif').hasClass('gif-view') !== true);
-
 	$('#gif-button').click(gif.handleSubmit);
 
 });
