@@ -13,13 +13,13 @@ var giphy = () => {
 
 			handleSubmit (e) {
 
-				gif.offset = 0;
-				console.log(this);
-				e.preventDefault();
-				$('.gifs-returned-row').empty();
-				gif.searchTerm = $('#gif-search').val().replace(/ /g, '+');
-				gif.api(gif.searchTerm, gif.offset);
-
+				if ($(this).val() !== '') {
+					gif.offset = 0;
+					e.preventDefault();
+					$('.gifs-returned-row').empty();
+					gif.searchTerm = $(this).val().replace(/ /g, '+');
+					gif.api(gif.searchTerm, gif.offset);
+				}
 
 			},
 
@@ -163,8 +163,6 @@ var giphy = () => {
 const gif = giphy();
 
 $(document).ready(function () {
-
-	console.log($('.gif').hasClass('gif-view') !== true);
 
 	$('#gif-button').click(gif.handleSubmit);
 

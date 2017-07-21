@@ -48,8 +48,8 @@
 }
 
 .gif-view {
-  height: 400px !important;
-  width: 700px !important;
+  height: 300px !important;
+  width: 500px !important;
   margin: 1rem auto;
   transition: ease all 0.3s;
 }
