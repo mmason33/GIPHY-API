@@ -9,8 +9,9 @@ var giphy = () => {
 				gif.offset = 0;
 				e.preventDefault();
 				$('.gifs-returned-row').empty();
-				gif.searchTerm = $(this).val().replace(/ /g, '+');
+				gif.searchTerm = $('#gif-search').val().replace(/ /g, '+');
 				gif.api(gif.searchTerm, gif.offset);
+				console.log(gif.searchTerm);
 			}
 		},
 		api (searchTerm, offset) {
